@@ -47,15 +47,5 @@
     </div>
 
 {% endfor %}
-<div class="container text-center pb-5">
-    {% if paginator.has_previous %}
-        <a class="btn btn-info text-white  ml-1"
-           href="{% url 'blog:Index' %}?page={{ paginator.previous_page_number }}">&rarr;پست های جدید </a>
-    {% endif %}
-
-    {% if paginator.has_next %}
-        <a class="btn btn-info text-white  mr-1" href="{% url 'blog:Index' %}?page={{ paginator.next_page_number }}">  پست های قدیمی  &larr; </a>
-    {% endif %}
-</div>
 </body>
 </html>

@@ -21,7 +21,7 @@ class Article(models.Model):
     cover = models.ImageField(upload_to='media/article_cover/', null=False, blank=False, verbose_name='عکس مقاله')
     content = models.TextField(blank=False, null=False, verbose_name='متن مقاله')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='تاریخ')
-    category = models.ForeignKey('Category', on_delete=models.CASCADE, verbose_name='دسته بندی')
+    category = models.ManyToManyField('Category', blank=False, verbose_name='دسته بندی',related_name="article")
     author = models.ForeignKey(UserProfile, on_delete=models.CASCADE, verbose_name='انتشار دهنده')
 
     class Meta:
@@ -30,7 +30,8 @@ class Article(models.Model):
 
     def jcreated_at(self):
         return jalali_convert(self.created_at)
-    jcreated_at.short_description='زمان انتشار'
+
+    jcreated_at.short_description = 'زمان انتشار'
 
 
 class Category(models.Model):

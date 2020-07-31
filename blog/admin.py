@@ -10,8 +10,13 @@ admin.site.register(UserProfile, UserProfileAdmin)
 
 
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ['title', 'category', 'author', 'jcreated_at']
+    list_display = ['title', 'category_title', 'author', 'jcreated_at']
     search_fields = ['title', 'content']
+
+    def category_title(self, obj):
+        return ' , '.join([category.title for category in obj.category.all()])
+
+    category_title.short_description = "دسته بندی"
 
 
 admin.site.register(Article, ArticleAdmin)
