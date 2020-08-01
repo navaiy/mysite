@@ -21,24 +21,27 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-{% for article in article_data %}
+{% for article in object_list %}
     <div class="container">
         <div class="card rounded shadow border-0 m-3 ">
 
             <div class="card-body">
                 <div class="row no-gutters  position-relative">
                     <div class="col-md-6 mb-md-0 p-md-4">
-                        <img class="card-img img-fluid  w-100" src="{{ article.cover }}">
+                        <img class="card-img img-fluid  w-100" src="{{ article.cover.url }}">
                     </div>
                     <div class="col-md-6 position-static p-4 pl-md-0">
                         <h1 class="h4 card-title text-center p-3">{{ article.title }}</h1>
-                        <p class="card-text text-justify mt-2">{{ article.contact }}</p>
+                        <p class="card-text text-justify mt-2">{{ article.content|truncatewords:60 }}</p>
                     </div>
                 </div>
             </div>
             <div class="card-footer bg-white mt-4 ">
-                <small class="text-right font-weight-lighter m-2">دسته بندی : {{ article.category }}</small>
-                <small class="text-right font-weight-lighter m-2">زمان انتشار : {{ article.created_at }}</small>
+
+                <small class="text-right font-weight-lighter m-2">دسته بندی :
+                    {% for category in article.category.all %}
+                        <a href="{% url 'blog:Category' category.title %}">{{ category.title }}</a> {% endfor %}</small>
+                <small class="text-right font-weight-lighter m-2">زمان انتشار : {{ article.jcreated_at }}</small>
                 <a class="btn btn-info text-white m-2 float-left" href="{% url 'blog:DetailArticle' article.id %}">ادامه
                     مطلب</a>
 
@@ -47,14 +50,16 @@
     </div>
 
 {% endfor %}
-<div class="container text-center pb-5">
-    {% if paginator.has_previous %}
+{#bin paginator#}
+<div class="container text-center pb-5" >
+    {% if page_obj.has_previous %}
         <a class="btn btn-info text-white  ml-1"
-           href="{% url 'blog:Index' %}?page={{ paginator.previous_page_number }}">&rarr;پست های جدید </a>
+           href="{% url 'blog:Category' %}?page={{ page_obj.previous_page_number }}">&rarr;پست های جدید </a>
     {% endif %}
 
-    {% if paginator.has_next %}
-        <a class="btn btn-info text-white  mr-1" href="{% url 'blog:Index' %}?page={{ paginator.next_page_number }}">  پست های قدیمی  &larr; </a>
+    {% if page_obj.has_next %}
+        <a class="btn btn-info text-white  mr-1" href="{% url 'blog:Category' %}?page={{ page_obj.next_page_number }}"> پست
+            های قدیمی &larr; </a>
     {% endif %}
 </div>
 </body>

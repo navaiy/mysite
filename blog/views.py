@@ -1,61 +1,35 @@
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import TemplateView
 from .models import *
-from django.core.paginator import Paginator
+from django.views.generic import ListView, DateDetailView
 
 
 # Display page home
-class Index(TemplateView):
-    def get(self, request, *args, **kwargs):
-        objects = Article.objects.all().order_by('-created_at')
-        # Paginator
-        paginator = Paginator(objects, 2)
-        page_number = request.GET.get('page')
-        article_all = paginator.get_page(page_number)
-
-        article_data = []
-        for article in article_all:
-            article_data.append({
-                'id': article.id,
-                'title': article.title,
-                'cover': article.cover.url,
-                'contact': article.content[100:],
-                'category': ' , '.join([category.title for category in article.category.all()]),
-                'created_at': article.jcreated_at(),
-            })
-
-        context = {
-            'article_data': article_data,
-            'paginator': article_all,
-        }
-        return render(request, 'blog/index.html', context)
+class Index(ListView):
+    queryset = Article.objects.all().order_by('-created_at')
+    paginate_by = 1
+    template_name = 'blog/index.html'
 
 
 # Display a article
-class DetailArticle(TemplateView):
-    def dispatch(self, request, *args, **kwargs):
-        context = {
-            'article': get_object_or_404(Article, id=kwargs.get('id'))
-        }
-        return render(request, 'blog/detail_article.html', context)
+class DetailArticle(DateDetailView):
+    template_name = 'blog/detail_article.html'
+
+    def get_object(self, queryset=None):
+        id = self.kwargs.get('id')
+        return get_object_or_404(Article, id=id)
 
 
 # Display articles in a category
-class ACategory(TemplateView):
-    def dispatch(self, request, *args, **kwargs):
-        article_all = get_object_or_404(Category, title=kwargs.get('title'))
-        article_data = []
-        for article in article_all.article.all():
-            article_data.append({
-                'id': article.id,
-                'title': article.title,
-                'cover': article.cover.url,
-                'contact': article.content[100:],
-                'category': ' , '.join([category.title for category in article.category.all()]),
-                'created_at': article.jcreated_at()
-            })
+class ACategory(ListView):
+    paginate_by = 2
+    template_name = 'blog/category.html'
 
-        context = {
-            'article_data': article_data
-        }
-        return render(request, 'blog/category.html', context)
+    def get_queryset(self):
+        title = self.kwargs.get('title')
+        category = get_object_or_404(Category, title=title)
+        return category.article.all()
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = self.kwargs.get('title')
+        return context
