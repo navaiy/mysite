@@ -1,0 +1,127 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block header %}
+    <h2 class="text-right text-white shadow-lg">آموزش ها و مقالات</h2>
+{% endblock %}
+
+{% block side_box %}
+    <div class="col-lg-3 d-none d-lg-inline">
+        <div class="row">
+
+            <!--last article-->
+            <div class="col-12">
+                <div class="card shadow rounded">
+                    <div class="card-header bg-warning text-white ">
+                        <h1 class="h6 mb-2">آخرین پست</h1>
+                    </div>
+                    <ul class="list-group list-group-flush text-right p-0">
+                        {% for list in box_list %}
+                            <li class="list-group-item">
+                                <img class="rounded-circle style-img-list-right"
+                                     src="{{ list.cover.url }}">
+                                <a class="small btn-link mr-1 " style="margin-top: -10px;" href="#">{{ list.title }}</a>
+                                <small class="d-block">
+                                    <img class="ml-2 mr-5 pr-3" src="{% static 'assets/img/time.svg' %}" height="24">1345/2/2
+                                </small>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+            <!--last Comments-->
+            <div class="col-12 mt-4">
+                <div class="card shadow rounded">
+                    <div class="card-header bg-warning text-white ">
+                        <h1 class="h6 mb-2">آخرین نظرات</h1>
+                    </div>
+                    <ul class="list-group list-group-flush text-right p-0">
+                        <li class="list-group-item">
+                            <img class="rounded-circle style-img-list-right"
+                                 src="assets/img/portfolio/01-full.jpg">
+                            <a class="btn btn-link " href="#">amir</a>
+                            <p style="font-size: 17px" class="mr-5  text-secondary mt-0">سلام خیلی عالی لطفا
+                                مطلب بیشتری بزارید</p>
+                            <small class="d-block text-left">
+                                <img class="ml-2 mr-5 pr-3" src="assets/img/time.svg" height="24">1345/2/2
+                            </small>
+                        </li>
+                        <li class="list-group-item">
+                            <img class="rounded-circle style-img-list-right"
+                                 src="assets/img/portfolio/01-full.jpg">
+                            <a class="btn btn-link " href="#">amir</a>
+                            <p style="font-size: 17px" class="mr-5  text-secondary mt-0">سلام خیلی عالی لطفا
+                                مطلب بیشتری بزارید</p>
+                            <small class="d-block text-left">
+                                <img class="ml-2 mr-5 pr-3" src="assets/img/time.svg" height="24">1345/2/2
+                            </small>
+                        </li>
+                        <li class="list-group-item">
+                            <img class="rounded-circle style-img-list-right"
+                                 src="assets/img/portfolio/01-full.jpg">
+                            <a class="btn btn-link " href="#">amir</a>
+                            <p style="font-size: 17px" class="mr-5  text-secondary mt-0">سلام خیلی عالی لطفا
+                                مطلب بیشتری بزارید</p>
+                            <small class="d-block text-left">
+                                <img class="ml-2 mr-5 pr-3" src="assets/img/time.svg" height="24">1345/2/2
+                            </small>
+                        </li>
+
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block main %}
+    <div class="container">
+
+        <!--article-->
+        <div class="card rounded shadow">
+            <div class="mr-5 ml-5 mt-3 text-center ">
+                <img class="img-fluid rounded shadow-sm  w-75 " src="{{ article.cover.url }}">
+            </div>
+            <h1 class="text-info h5 text-center m-3">{{ article.title }}</h1>
+            <hr class="hr">
+            <small class="text-secondary text-center ">
+                <img src="{% static 'assets/img/view.svg' %}" width="20"
+                     class="  ml-1"/><span class="">32</span>
+                <img src="{% static 'assets/img/chat.svg' %}" width="17"
+                     class="ml-1 mr-lg-1 mr-md-1"/>32
+                <img src="{% static 'assets/img/time.svg' %}" width="17" class="ml-1 mr-2"/>{{ article.jcreated_d }}
+                <span class="text-secondary mr-1">
+                        دسته بندی : {% for  category in article.category.all %}
+                    <a class="btn-link " href="{% url 'blog:ArticleListCategory' category.title %}">
+                            {{ category }}
+                        </a>
+                {% endfor %}
+                        </span>
+            </small>
+            <div class="card-body">
+                <p class="card-text text-justify">{{ article.content }}</p>
+            </div>
+        </div>
+
+        <!--author-->
+        <div class="card rounded shadow mt-3">
+
+
+            <div class="card-header bg-warning text-white">
+                <div class="row">
+                    <div class="col-2"><span>نویسنده</span></div>
+                    <div class="col-8 text-center"><img class="rounded-circle style-img-author" src="{{ article.author.avatar.url }}"></div>
+                </div>
+            </div>
+            <div class="card-body border-0 text-center">
+
+                <h1 class="h6 d-block mr-2 mt-3 ">{{ article.author.user.first_name }} {{ article.author.user.last_name }}</h1>
+
+                <p class="card-text">{{ article.author.description }}</p>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

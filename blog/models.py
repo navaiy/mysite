@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from extensions.utils import jalali_convert
+from extensions.utils import jalali_convert_dt, jalali_convert_d
 from django.utils.html import format_html
 
 
@@ -31,7 +31,10 @@ class Article(models.Model):
 
     # Change the Gregorian time to the solar
     def jcreated_at(self):
-        return jalali_convert(self.created_at)
+        return jalali_convert_dt(self.created_at)
+
+    def jcreated_d(self):
+        return jalali_convert_d(self.created_at)
 
     # ِDisplay cover in panel
     def display_cover(self):
