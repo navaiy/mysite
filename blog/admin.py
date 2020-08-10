@@ -1,6 +1,9 @@
 from django.contrib import admin
 from .models import *
 
+# Rename the title
+admin.site.site_header = 'مدیریت وبلاگ'
+
 
 class UserProfileAdmin(admin.ModelAdmin):
     list_display = ['user', 'description']
