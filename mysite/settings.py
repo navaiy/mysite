@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # 'blog',
     'bootstrap4',
     'extensions',
+    'widget_tweaks',
 
 ]
 
