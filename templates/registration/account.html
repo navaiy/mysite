@@ -1,0 +1,56 @@
+{% extends 'registration/base.html' %}
+
+{% block htitle %}لیست مقالات{% endblock %}
+
+{% block title %}لیست مقالات{% endblock %}
+
+{% block main %}
+    <h5 class="mb-4">خوش امدید {{ user.get_full_name }}</h5>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-tools">
+                        <div class="input-group input-group-sm" style="width: 250px;">
+                            <input type="text" name="table_search" class="form-control float-right"
+                                   placeholder="Search">
+
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-hover table-striped">
+                        <thead>
+                        <tr>
+                            <th>عنوان</th>
+                            <th>تصویر مقاله</th>
+                            <th>نویسنده</th>
+                            <th>دسته بندی</th>
+                            <th>تاریخ انتشار</th>
+                            <th>وضعیت</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for article in object_list %}
+                            <tr>
+                                <td>{{ article.title }}</td>
+                                <td><img class="img-fluid rounded shadow" width="80" src="{{ article.cover.url }}"></td>
+                                <td>{{ article.author.user.get_full_name }}</td>
+                                <td>{{ article.category_title }}</td>
+                                <td>{{ article.jcreated_at }}</td>
+                                <td><a class="btn btn-info" href="{% url 'blog:DetailArticle' article.title %}">نمایش در سایت</a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+{% endblock %}

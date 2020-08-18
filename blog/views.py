@@ -20,8 +20,8 @@ class DetailArticle(DateDetailView):
     template_name = 'blog/datail_article.html'
 
     def get_object(self, queryset=None):
-        id = self.kwargs.get('id')
-        return get_object_or_404(Article, id=id)
+        title = self.kwargs.get('title')
+        return get_object_or_404(Article, title=title)
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)

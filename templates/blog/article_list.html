@@ -23,14 +23,15 @@
                     </div>
                     <ul class="list-group list-group-flush text-right p-0">
                         {% for list in box_list %}
-                        <li class="list-group-item">
-                            <img class="rounded-circle style-img-list-right"
-                                 src="{{ list.cover.url }}">
-                            <a class="small btn-link mr-1 " style="margin-top: -10px;" href="#">{{ list.title}}</a>
-                            <small class="d-block">
-                                <img class="ml-2 mr-5 pr-3" src="{% static 'blog/assets/img/time.svg' %}" height="24">1345/2/2
-                            </small>
-                        </li>
+                            <li class="list-group-item">
+                                <img class="rounded-circle style-img-list-right"
+                                     src="{{ list.cover.url }}">
+                                <a class="small btn-link mr-1 " style="margin-top: -10px;" href="#">{{ list.title }}</a>
+                                <small class="d-block">
+                                    <img class="ml-2 mr-5 pr-3" src="{% static 'blog/assets/img/time.svg' %}"
+                                         height="24">1345/2/2
+                                </small>
+                            </li>
                         {% endfor %}
                     </ul>
                 </div>
@@ -92,10 +93,11 @@
                      alt="{{ article.title }}">
                 <div class="card-body">
                     <h5 class="card-title text-center">{{ article.title }}</h5>
-                    <p class="card-text mt-3 text-justify small">{{ article.content|truncatewords:52 }}</p>
+                    <p class="card-text mt-3 text-justify small">{{ article.content|striptags|truncatewords:52 }}</p>
                 </div>
                 <div class="card-footer mt-3 rounded">
-                    <a href="{% url 'blog:DetailArticle' article.id %}" class="btn btn-primary rounded float-left">ادامه مطلب</a>
+                    <a href="{% url 'blog:DetailArticle' article.id %}" class="btn btn-primary rounded float-left">ادامه
+                        مطلب</a>
                     <small class="text-secondary">
                         <img src="{% static 'blog/assets/img/view.svg' %}" width="23"
                              class=" d-none d-lg-inline d-md-inline ml-1"/><span
@@ -103,7 +105,7 @@
                         <img src="{% static 'blog/assets/img/chat.svg' %}" width="20"
                              class="ml-1 mr-lg-1 mr-md-1"/>32
                         <img src="{% static 'blog/assets/img/time.svg' %}" width="20"
-                             class="ml-1 mr-2"/>{{article.jcreated_d}}
+                             class="ml-1 mr-2"/>{{ article.jcreated_d }}
                         <span class="text-secondary mr-1 d-none d-lg-inline d-md-inline">
                         دسته بندی : {% for  category in article.category.all %}
                             <a class="btn-link" href="{% url 'blog:ArticleListCategory' category.title %}">

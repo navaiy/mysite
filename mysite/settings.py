@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'extensions',
     'widget_tweaks',
+    'crispy_forms',
 
 ]
 
@@ -132,4 +133,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, '')
 
 LOGIN_REDIRECT_URL = 'account:account'
-LOGIN_URL='account:login'
+LOGIN_URL = 'account:login'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+AUTH_USER_MODEL = 'account.User'

@@ -6,6 +6,7 @@ app_name = 'account'
 
 urlpatterns = [
     path('', ArticleList.as_view(), name='account'),
+    path('ArticleCreate', ArticleCreate.as_view(), name='ArticleCreate'),
 
 ]
 
