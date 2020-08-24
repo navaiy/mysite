@@ -5,13 +5,13 @@ from django.views.generic import ListView, DateDetailView
 
 # Display page home
 class ArticleList(ListView):
-    queryset = Article.objects.all().order_by('-created_at')
+    queryset = Article.objects.filter(status='م').order_by('-created_at')
     paginate_by = 2
     template_name = 'blog/article_list.html'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['box_list'] = Article.objects.all().order_by('-created_at')[:3]
+        context['box_list'] = Article.objects.filter(status='م').order_by('-created_at')[:3]
         return context
 
 
@@ -21,11 +21,14 @@ class DetailArticle(DateDetailView):
 
     def get_object(self, queryset=None):
         title = self.kwargs.get('title')
-        return get_object_or_404(Article, title=title)
+        if self.request.user.is_active:
+            return get_object_or_404(Article, title=title)
+        else:
+            return get_object_or_404(Article, title=title, status='م')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['box_list'] = Article.objects.all().order_by('-created_at')[:3]
+        context['box_list'] = Article.objects.filter(status='م').order_by('-created_at')[:3]
         return context
 
 
@@ -37,9 +40,10 @@ class ArticleListCategory(ListView):
     def get_queryset(self):
         title = self.kwargs.get('title')
         category = get_object_or_404(Category, title=title)
-        return category.article.all()
+        return category.article.filter(status='م')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = self.kwargs.get('title')
+        context['box_list'] = Article.objects.filter(status='م').order_by('-created_at')[:3]
         return context

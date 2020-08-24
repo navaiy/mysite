@@ -1,0 +1,21 @@
+{% extends 'registration/base.html' %}
+
+
+{% block htitle %}حذف مقاله{% endblock %}
+
+{% block title %}لیست مقالات{% endblock %}
+
+{% block main %}
+    <div class="card shadow rounded  text-center m-5">
+        <div class="card-header bg-danger">
+            <h6>حذف مقاله</h6>
+        </div>
+        <div class="card-body">
+            <form method="post">{% csrf_token %}
+                <p>آیا شما از حذف مقاله ی {{ article.title }}  از {{ article.author.user.get_full_name }} مطمئن هستید ؟  </p>
+                <input class="btn btn-danger btn-lg" type="submit" value="حدف">
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

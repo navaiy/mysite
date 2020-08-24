@@ -96,7 +96,7 @@
                     <p class="card-text mt-3 text-justify small">{{ article.content|striptags|truncatewords:52 }}</p>
                 </div>
                 <div class="card-footer mt-3 rounded">
-                    <a href="{% url 'blog:DetailArticle' article.id %}" class="btn btn-primary rounded float-left">ادامه
+                    <a href="{% url 'blog:DetailArticle' article.title %}" class="btn btn-primary rounded float-left">ادامه
                         مطلب</a>
                     <small class="text-secondary">
                         <img src="{% static 'blog/assets/img/view.svg' %}" width="23"

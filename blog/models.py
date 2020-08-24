@@ -6,9 +6,9 @@ from django.utils.html import format_html
 
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='کاربر',blank=True, null=True)
-    avatar = models.ImageField(upload_to='media/user_avatar/', null=True, blank=True, verbose_name='عکس کاربر')
-    description = models.CharField(max_length=500,  verbose_name='توضیحات و رزمه')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='کاربر')
+    avatar = models.ImageField(upload_to='media/user_avatar/', null=False, blank=False, verbose_name='عکس کاربر')
+    description = models.CharField(max_length=500, null=False, blank=False, verbose_name='توضیحات و رزمه')
 
     class Meta:
         verbose_name = 'انتشار دهنده'
@@ -19,18 +19,26 @@ class UserProfile(models.Model):
 
 
 class Article(models.Model):
+    CHOICES_STATUS = (
+        ('م', 'منتشر شده'),
+        ('پ', 'پیش نویس'),
+        ('د', 'در صف انتشار'),
+        ('ب', 'برگشت داده شده'),
+    )
     title = models.CharField(max_length=200, blank=False, null=False, unique=True, verbose_name='عنوان')
     cover = models.ImageField(upload_to='media/article_cover/', null=False, blank=False, verbose_name='عکس مقاله')
     content = models.TextField(blank=False, null=False, verbose_name='متن مقاله')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='تاریخ')
     category = models.ManyToManyField('Category', blank=False, verbose_name='دسته بندی', related_name='article')
-    author = models.ForeignKey(UserProfile, on_delete=models.CASCADE, verbose_name='انتشار دهنده',null=True)
+    author = models.ForeignKey(UserProfile, on_delete=models.CASCADE, verbose_name='انتشار دهنده')
+    status = models.CharField(max_length=1, choices=CHOICES_STATUS, verbose_name='وضعیت', null=False, blank=False,
+                              default='پ')
 
     class Meta:
         verbose_name = 'مقاله'
         verbose_name_plural = 'مقالات'
 
-    # Change the Gregorian time to the solar
+
     def jcreated_at(self):
         return jalali_convert_dt(self.created_at)
 

@@ -13,7 +13,7 @@ admin.site.register(UserProfile, UserProfileAdmin)
 
 
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ['title', 'display_cover', 'category_title', 'author', 'jcreated_at']
+    list_display = ['title', 'display_cover', 'category_title', 'author', 'jcreated_at','status']
     search_fields = ['title', 'content']
 
     def category_title(self, obj):

@@ -5,52 +5,89 @@
 {% block title %}لیست مقالات{% endblock %}
 
 {% block main %}
-    <h5 class="mb-4">خوش امدید {{ user.get_full_name }}</h5>
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-tools">
-                        <div class="input-group input-group-sm" style="width: 250px;">
-                            <input type="text" name="table_search" class="form-control float-right"
-                                   placeholder="Search">
+    {% if object_list %}
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-tools">
+                            <div class="input-group input-group-sm" style="width: 250px;">
+                                <input type="text" name="table_search" class="form-control float-right"
+                                       placeholder="Search">
 
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body table-responsive p-0">
-                    <table class="table table-hover table-striped">
-                        <thead>
-                        <tr>
-                            <th>عنوان</th>
-                            <th>تصویر مقاله</th>
-                            <th>نویسنده</th>
-                            <th>دسته بندی</th>
-                            <th>تاریخ انتشار</th>
-                            <th>وضعیت</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for article in object_list %}
+                    <!-- /.card-header -->
+                    <div class="card-body table-responsive p-0">
+                        <table class="table table-hover table-striped text-center">
+                            <thead>
                             <tr>
-                                <td>{{ article.title }}</td>
-                                <td><img class="img-fluid rounded shadow" width="80" src="{{ article.cover.url }}"></td>
-                                <td>{{ article.author.user.get_full_name }}</td>
-                                <td>{{ article.category_title }}</td>
-                                <td>{{ article.jcreated_at }}</td>
-                                <td><a class="btn btn-info" href="{% url 'blog:DetailArticle' article.title %}">نمایش در سایت</a></td>
+                                <th>تصویر مقاله</th>
+                                <th>عنوان</th>
+                                <th>نویسنده</th>
+                                <th>دسته بندی</th>
+                                <th>تاریخ انتشار</th>
+                                <th>وضعیت</th>
                             </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                            {% for article in object_list %}
+                                <tr>
+                                    <td><img class="img-fluid rounded shadow" width="80" src="{{ article.cover.url }}">
+                                    </td>
+                                    <td>{{ article.title }}</td>
+                                    <td>{{ article.author.user.get_full_name }}</td>
+                                    <td>{{ article.category_title }}</td>
+                                    <td>{{ article.jcreated_at }}</td>
+                                    <td>
+                                        <!---------------------------------------------->
+                                        {% if article.status == 'م' %}
+                                            <span class="badge badge-success m-1">منتشره شده</span><br>
+                                        {% elif article.status == 'د' %}
+                                            <span class="badge badge-info m-1">در حال بررسی</span><br>
+                                        {% elif article.status == 'ب' %}
+                                            <span class="badge badge-warning m-1">برگشت داده شده</span><br>
+                                        {% else %}
+                                            <span class="badge badge-danger m-1">پیش نویس</span><br>
+                                        {% endif %}
+
+                                        <!---------------------------------------------->
+                                        {% if article.status == 'م' %}
+                                            <a class="badge badge-info m-1"
+                                               href="{% url 'blog:DetailArticle' article.title %}">نمایش در سایت</a><br>
+                                        {% else %}
+                                            <a class="badge badge-dark m-1"
+                                               href="{% url 'blog:DetailArticle' article.title %}">پینمایش در سایت</a>
+                                            <br>
+                                        {% endif %}
+
+                                        <!---------------------------------------------->
+                                        {% if user.is_superuser or article.status in 'بپ'|make_list %}
+                                            <a class="badge badge-primary  m-1"
+                                               href="{% url 'account:ArticleUpdate' article.pk %}">ویرایش</a>
+                                        {% endif %}
+
+                                        <!---------------------------------------------->
+                                        {% if user.is_superuser or article.status in 'بپ'|make_list %}
+                                            <a class="badge text-danger  m-1"
+                                               href="{% url 'account:ArticleDelete' article.pk %}">حذف</a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
                 </div>
-                <!-- /.card-body -->
+                <!-- /.card -->
             </div>
-            <!-- /.card -->
         </div>
-    </div>
+    {% else %}
+        <h4 class="text-center">محتوایی برای نمایش وجود ندارد</h4>
+    {% endif %}
 {% endblock %}
