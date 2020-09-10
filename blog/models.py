@@ -1,21 +1,10 @@
+from django.contrib.contenttypes.fields import GenericRelation
+from comment.models import Comment
 from django.db import models
 from django.urls import reverse
 from account.models import User
 from extensions.utils import jalali_convert_dt, jalali_convert_d
 from django.utils.html import format_html
-
-
-class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='کاربر')
-    avatar = models.ImageField(upload_to='media/user_avatar/', null=False, blank=False, verbose_name='عکس کاربر')
-    description = models.CharField(max_length=500, null=False, blank=False, verbose_name='توضیحات و رزمه')
-
-    class Meta:
-        verbose_name = 'انتشار دهنده'
-        verbose_name_plural = 'انتشار دهنده ها'
-
-    def __str__(self):
-        return self.user.first_name + " " + self.user.last_name
 
 
 class Article(models.Model):
@@ -30,14 +19,15 @@ class Article(models.Model):
     content = models.TextField(blank=False, null=False, verbose_name='متن مقاله')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='تاریخ')
     category = models.ManyToManyField('Category', blank=False, verbose_name='دسته بندی', related_name='article')
-    author = models.ForeignKey(UserProfile, on_delete=models.CASCADE, verbose_name='انتشار دهنده')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='انتشار دهنده', null=False, blank=False)
     status = models.CharField(max_length=1, choices=CHOICES_STATUS, verbose_name='وضعیت', null=False, blank=False,
                               default='پ')
+    comments = GenericRelation(Comment)
+
 
     class Meta:
         verbose_name = 'مقاله'
         verbose_name_plural = 'مقالات'
-
 
     def jcreated_at(self):
         return jalali_convert_dt(self.created_at)

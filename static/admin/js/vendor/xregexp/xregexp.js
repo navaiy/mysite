@@ -1156,7 +1156,7 @@ XRegExp = XRegExp || (function (undef) {
             return match[1] ? "[\\s\\S]" : "\\b\\B";
         });
 
-/* Comment pattern: (?# )
+/* comment pattern: (?# )
  * Inline comments are an alternative to the line comments allowed in free-spacing mode (flag x).
  */
     add(/(?:\(\?#[^)]*\))+/,

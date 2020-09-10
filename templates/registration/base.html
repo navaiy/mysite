@@ -60,7 +60,7 @@
         <ul class="navbar-nav mr-auto-navbav">
             <!-- Messages Dropdown Menu -->
             <li class="nav-item dropdown">
-                <a class="nav-link"  href="{% url 'account:login' %}">
+                <a class="nav-link"  href="{% url 'logout' %}">
                     <img width="25" src="{% static 'registration/Login/sign-out-alt-solid.svg' %}">
                 </a>
             </li>
@@ -82,10 +82,10 @@
                         <h1 class="m-0 text-dark">{% block title %}عنوان{% endblock %}</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Dashboard v1</li>
-                        </ol>
+{#                        <ol class="breadcrumb float-sm-right">#}
+{#                            <li class="breadcrumb-item"><a href="#">Home</a></li>#}
+{#                            <li class="breadcrumb-item active">Dashboard v1</li>#}
+{#                        </ol>#}
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->

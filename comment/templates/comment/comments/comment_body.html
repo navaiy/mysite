@@ -1,0 +1,17 @@
+{% load comment_tags %}
+<div class="d-flex flex-row bd-highlight text-right">
+    <div class="{% block image_wrapper_cls %}bd-highlight {% endblock image_wrapper_cls %}">
+        <a href="{% get_profile_url comment %}">
+            <img class="rounded-circle image-style shadow " width="60" height="60"
+                 src="{{ comment.user.avatar.url }}" alt="{{ comment.user.username }}">
+        </a>
+    </div>
+
+    {% include 'comment/comments/comment_content.html' with comment=comment %}
+
+    {% if allowed_flags and comment.user != user %}
+        <div class="bd-highlight ">
+            {% include "comment/flags/flags.html" %}
+        </div>
+    {% endif %}
+</div>

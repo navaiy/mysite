@@ -1,0 +1,53 @@
+{% extends 'registration/base.html' %}
+{% load  crispy_forms_tags %}
+
+{% block htitle %}پروفایل{% endblock %}
+
+{% block title %}پروفایل{% endblock %}
+
+{% block main %}
+    <div class="card shadow rounded">
+        <div class="card-header bg-info">
+            <h6>افزودن مقاله</h6>
+        </div>
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data">{% csrf_token %}
+{#                {{ form.as_p }}#}
+                                <div class="form-row">
+                                    <div class="form-group col-md-6 mb-0">
+                                        {{ form.username|as_crispy_field }}
+                                    </div>
+                                    <div class="form-group col-md-6 mb-0">
+                                        {{ form.email|as_crispy_field }}
+                                    </div>
+                                    <div class="form-group col-md-12 mb-0">
+                                        <label class="my-3">تغییر گذرواژه : </label>
+                                        <span>
+                                            برای تغییر گذرواژه
+                                            <a href="{% url 'password_change' %}">کلیک</a>
+                                            کنید
+                                        </span>
+                                    </div>
+                                    <div class="form-group col-md-6 mb-0">
+                                        {{ form.first_name|as_crispy_field }}
+                                    </div>
+                                    <div class="form-group col-md-6 mb-0">
+                                        {{ form.last_name|as_crispy_field }}
+                                    </div>
+                                    <div class="form-group col-md-6 mb-0">
+                                        {{ form.description|as_crispy_field }}
+                                    </div>
+                                    <div class="form-group col-md-6 mb-0">
+                                        {{ form.avatar|as_crispy_field }}
+                                    </div>
+                                </div>
+                <button class="btn btn-success" type="submit">ویرایش اطلاعات</button>
+                {% if user.is_superuser and request.resolver_match.kwargs.pk %}
+                    <a class="btn btn-danger text-white"
+                       href="{% url 'account:ArticleDelete'  request.resolver_match.kwargs.pk %}">حذف</a>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

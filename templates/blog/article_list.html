@@ -1,4 +1,5 @@
 {% extends 'blog/base.html' %}
+{% load base_tags %}
 {% load static %}
 
 {% block alert %}
@@ -12,75 +13,7 @@
 {% endblock %}
 
 {% block side_box %}
-    <div class="col-lg-3 d-none d-lg-inline">
-        <div class="row">
-
-            <!--last article-->
-            <div class="col-12">
-                <div class="card shadow rounded">
-                    <div class="card-header bg-warning text-white ">
-                        <h1 class="h6 mb-2">آخرین پست</h1>
-                    </div>
-                    <ul class="list-group list-group-flush text-right p-0">
-                        {% for list in box_list %}
-                            <li class="list-group-item">
-                                <img class="rounded-circle style-img-list-right"
-                                     src="{{ list.cover.url }}">
-                                <a class="small btn-link mr-1 " style="margin-top: -10px;" href="#">{{ list.title }}</a>
-                                <small class="d-block">
-                                    <img class="ml-2 mr-5 pr-3" src="{% static 'blog/assets/img/time.svg' %}"
-                                         height="24">1345/2/2
-                                </small>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-
-            <!--last Comments-->
-            <div class="col-12 mt-4">
-                <div class="card shadow rounded">
-                    <div class="card-header bg-warning text-white ">
-                        <h1 class="h6 mb-2">آخرین نظرات</h1>
-                    </div>
-                    <ul class="list-group list-group-flush text-right p-0">
-                        <li class="list-group-item">
-                            <img class="rounded-circle style-img-list-right"
-                                 src="assets/img/portfolio/01-full.jpg">
-                            <a class="btn btn-link " href="#">amir</a>
-                            <p style="font-size: 17px" class="mr-5  text-secondary mt-0">سلام خیلی عالی لطفا
-                                مطلب بیشتری بزارید</p>
-                            <small class="d-block text-left">
-                                <img class="ml-2 mr-5 pr-3" src="assets/img/time.svg" height="24">1345/2/2
-                            </small>
-                        </li>
-                        <li class="list-group-item">
-                            <img class="rounded-circle style-img-list-right"
-                                 src="assets/img/portfolio/01-full.jpg">
-                            <a class="btn btn-link " href="#">amir</a>
-                            <p style="font-size: 17px" class="mr-5  text-secondary mt-0">سلام خیلی عالی لطفا
-                                مطلب بیشتری بزارید</p>
-                            <small class="d-block text-left">
-                                <img class="ml-2 mr-5 pr-3" src="assets/img/time.svg" height="24">1345/2/2
-                            </small>
-                        </li>
-                        <li class="list-group-item">
-                            <img class="rounded-circle style-img-list-right"
-                                 src="assets/img/portfolio/01-full.jpg">
-                            <a class="btn btn-link " href="#">amir</a>
-                            <p style="font-size: 17px" class="mr-5  text-secondary mt-0">سلام خیلی عالی لطفا
-                                مطلب بیشتری بزارید</p>
-                            <small class="d-block text-left">
-                                <img class="ml-2 mr-5 pr-3" src="assets/img/time.svg" height="24">1345/2/2
-                            </small>
-                        </li>
-
-
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+    {% datail_sidebar box_list box_comment %}
 {% endblock %}
 
 {% block main %}

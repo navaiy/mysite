@@ -37,11 +37,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog.apps.BlogConfig',
     'account.apps.AccountConfig',
+    'educational_film.apps.EducationalFilmConfig',
+    'mycollections.apps.MycollectionsConfig',
     # 'blog',
     'bootstrap4',
     'extensions',
     'widget_tweaks',
     'crispy_forms',
+    'comment',
 
 ]
 
@@ -80,12 +83,13 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'mysite',
-        'USER': 'postgres',
-        'PASSWORD': 'navaiy123456',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        # 'NAME': 'mysite',
+        # 'USER': 'postgres',
+        # 'PASSWORD': 'navaiy123456',
+        # 'HOST': 'localhost',
+        # 'PORT': '5432',
     }
 }
 
@@ -133,8 +137,16 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, '')
 
 LOGIN_REDIRECT_URL = 'account:account'
-LOGIN_URL = 'account:login'
+LOGOUT_REDIRECT_URL = 'login'
+LOGIN_URL = 'login'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 AUTH_USER_MODEL = 'account.User'
+
+PROFILE_APP_NAME = 'accounts'
+PROFILE_MODEL_NAME = 'User'
+
+# Heroku Setting
+import django_heroku
+django_heroku.settings(locals())

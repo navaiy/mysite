@@ -1,46 +1,63 @@
 {% extends 'registration/base.html' %}
+{% load widget_tweaks %}
 
 {% block htitle %}لیست مقالات{% endblock %}
 
 {% block title %}لیست مقالات{% endblock %}
 
 {% block main %}
-    {% if object_list %}
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-tools">
-                            <div class="input-group input-group-sm" style="width: 250px;">
-                                <input type="text" name="table_search" class="form-control float-right"
-                                       placeholder="Search">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header d-flex">
+                    <form method="get" action="{% url 'account:account' %}">
+                        <div class="input-group input-group-sm" style="width: 250px;">
 
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
-                                </div>
+                            <input type="text" name="table_search" class="form-control float-right"
+                                   placeholder="جستجو">
+
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
                             </div>
                         </div>
-                    </div>
-                    <!-- /.card-header -->
-                    <div class="card-body table-responsive p-0">
-                        <table class="table table-hover table-striped text-center">
-                            <thead>
-                            <tr>
-                                <th>تصویر مقاله</th>
-                                <th>عنوان</th>
-                                <th>نویسنده</th>
-                                <th>دسته بندی</th>
-                                <th>تاریخ انتشار</th>
-                                <th>وضعیت</th>
-                            </tr>
-                            </thead>
-                            <tbody>
+                    </form>
+
+
+                    {#                    <form method="get">{% csrf_token %}#}
+                    {#                        <div class="custom-control custom-switch mr-3">#}
+                    {#                            <input type="checkbox" class="custom-control-input" id="customSwitch1"#}
+                    {#                                   name="table_switch" onchange="this.form.submit()">#}
+                    {#                            <label class="custom-control-label text-secondary" for="customSwitch1">در صف#}
+                    {#                                انتشار</label>#}
+                    {#                        </div>#}
+                    {#                    </form>#}
+
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-hover table-striped text-center">
+                        <thead>
+                        <tr>
+
+                            <th>تصویر مقاله</th>
+                            <th>عنوان</th>
+                            <th>نویسنده</th>
+                            <th>دسته بندی</th>
+                            <th>تاریخ انتشار</th>
+                            <th>وضعیت</th>
+                        </tr>
+                        </thead>
+
+
+                        <tbody>
+                        {% if object_list %}
                             {% for article in object_list %}
                                 <tr>
-                                    <td><img class="img-fluid rounded shadow" width="80" src="{{ article.cover.url }}">
+                                    <td><img class=" rounded shadow" width="80" height="60"
+                                             src="{{ article.cover.url }}">
                                     </td>
                                     <td>{{ article.title }}</td>
-                                    <td>{{ article.author.user.get_full_name }}</td>
+                                    <td>{{ article.author.get_full_name }}</td>
                                     <td>{{ article.category_title }}</td>
                                     <td>{{ article.jcreated_at }}</td>
                                     <td>
@@ -58,10 +75,12 @@
                                         <!---------------------------------------------->
                                         {% if article.status == 'م' %}
                                             <a class="badge badge-info m-1"
-                                               href="{% url 'blog:DetailArticle' article.title %}">نمایش در سایت</a><br>
+                                               href="{% url 'blog:DetailArticle' article.title %}">نمایش در سایت</a>
+                                            <br>
                                         {% else %}
                                             <a class="badge badge-dark m-1"
-                                               href="{% url 'blog:DetailArticle' article.title %}">پینمایش در سایت</a>
+                                               href="{% url 'blog:DetailArticle' article.title %}">پینمایش در
+                                                سایت</a>
                                             <br>
                                         {% endif %}
 
@@ -79,15 +98,18 @@
                                     </td>
                                 </tr>
                             {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- /.card-body -->
+                        {% else %}
+                            <p class="text-center">محتوایی برای نمایش وجود ندارد</p>
+                        {% endif %}
+                        </tbody>
+
+
+                    </table>
                 </div>
-                <!-- /.card -->
+                <!-- /.card-body -->
             </div>
+            <!-- /.card -->
         </div>
-    {% else %}
-        <h4 class="text-center">محتوایی برای نمایش وجود ندارد</h4>
-    {% endif %}
+    </div>
+
 {% endblock %}

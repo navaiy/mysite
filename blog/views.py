@@ -12,6 +12,7 @@ class ArticleList(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['box_list'] = Article.objects.filter(status='م').order_by('-created_at')[:3]
+        context['box_comment'] = Comment.objects.all().order_by('-posted')[:3]
         return context
 
 
@@ -21,13 +22,14 @@ class DetailArticle(DateDetailView):
 
     def get_object(self, queryset=None):
         title = self.kwargs.get('title')
-        if self.request.user.is_active:
+        if self.request.user.is_authenticated:
             return get_object_or_404(Article, title=title)
         else:
             return get_object_or_404(Article, title=title, status='م')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['box_comment'] = Comment.objects.all().order_by('-posted')[:3]
         context['box_list'] = Article.objects.filter(status='م').order_by('-created_at')[:3]
         return context
 
