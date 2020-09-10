@@ -45,7 +45,7 @@ class ArticleListCategory(ListView):
         return category.article.filter(status='م')
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
+        context = super(ArticleListCategory,self).get_context_data(**kwargs)
         context['title'] = self.kwargs.get('title')
         context['box_list'] = Article.objects.filter(status='م').order_by('-created_at')[:3]
         return context
