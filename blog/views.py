@@ -10,7 +10,7 @@ class ArticleList(ListView):
     template_name = 'blog/article_list.html'
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
+        context = super(ArticleList, self).get_context_data(**kwargs)
         context['box_list'] = Article.objects.filter(status='م').order_by('-created_at')[:3]
         context['box_comment'] = Comment.objects.all().order_by('-posted')[:3]
         return context
@@ -28,7 +28,7 @@ class DetailArticle(DateDetailView):
             return get_object_or_404(Article, title=title, status='م')
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
+        context = super(DetailArticle, self).get_context_data(**kwargs)
         context['box_comment'] = Comment.objects.all().order_by('-posted')[:3]
         context['box_list'] = Article.objects.filter(status='م').order_by('-created_at')[:3]
         return context
@@ -45,7 +45,7 @@ class ArticleListCategory(ListView):
         return category.article.filter(status='م')
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        context = super(ArticleListCategory,self).get_context_data(**kwargs)
+        context = super(ArticleListCategory, self).get_context_data(**kwargs)
         context['title'] = self.kwargs.get('title')
         context['box_list'] = Article.objects.filter(status='م').order_by('-created_at')[:3]
         return context
