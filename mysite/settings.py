@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import dj_database_url
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
@@ -83,13 +85,15 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        # 'NAME': 'mysite',
-        # 'USER': 'postgres',
-        # 'PASSWORD': 'navaiy123456',
-        # 'HOST': 'localhost',
-        # 'PORT': '5432',
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'djangogirls',
+        'USER': 'name',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '',
+
     }
 }
 
@@ -128,7 +132,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
@@ -149,4 +153,10 @@ PROFILE_MODEL_NAME = 'User'
 
 # Heroku Setting
 import django_heroku
+
 django_heroku.settings(locals())
+
+ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
+
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
