@@ -144,8 +144,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 AUTH_USER_MODEL = 'account.User'
 
-PROFILE_APP_NAME = 'accounts'
-PROFILE_MODEL_NAME = 'User'
+
 
 # Heroku Setting
 import django_heroku
