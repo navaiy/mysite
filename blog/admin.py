@@ -6,8 +6,10 @@ admin.site.site_header = 'مدیریت وبلاگ'
 
 
 class ArticleAdmin(admin.ModelAdmin):
+
     list_display = ['title', 'display_cover', 'category_title', 'author', 'jcreated_at', 'status']
     search_fields = ['title', 'content']
+    raw_id_fields=("category",)
 
     def category_title(self, obj):
         return ' , '.join([category.title for category in obj.category.all()])

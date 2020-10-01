@@ -1,0 +1,70 @@
+{% extends 'registration/base.html' %}
+{% load widget_tweaks %}
+
+{% block htitle %}لیست پیام ها{% endblock %}
+
+{% block title %}لیست پیام ها{% endblock %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+
+                <!-- /.card-header -->
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-hover table-striped text-center">
+                        <thead>
+                        <tr>
+
+                            <th>عکس</th>
+                            <th>اسم</th>
+                            <th>متن پیام</th>
+                            <th>تاریخ پیام</th>
+                            <th>اسم مقاله</th>
+                            {% if user.is_superuser %}
+                                <th>نویسنده مقاله</th>
+                            {% endif %}
+                            <th>وضعیت</th>
+                        </tr>
+                        </thead>
+
+
+                        <tbody>
+                        {% if object_list %}
+                            {% for comment in object_list %}
+                                <tr>
+                                    <td><img class="rounded-circle shadow" width="80" height="60"
+                                             src="{{ comment.user.avatar.url }}">
+                                    </td>
+                                    <td>{{ comment.user.get_full_name }}</td>
+                                    <td>{{ comment.content|truncatewords:10 }}</td>
+                                    <td>{{ comment.jcreated_dt }}</td>
+                                    {% for article in comment.article.all %}
+                                        <td>{{ article.title }}</td>
+
+                                        {% if user.is_superuser %}
+                                            <td>{{ article.author }}</td>
+                                        {% endif %}
+
+                                        <td>
+                                            <a class="badge badge-info text-white p-1"
+                                               href="{% url 'blog:DetailArticle' article.title %}#{{ comment.pk }}">پاسخ</a>
+                                        </td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            <p class="text-center">محتوایی برای نمایش وجود ندارد</p>
+                        {% endif %}
+                        </tbody>
+
+
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+
+{% endblock %}

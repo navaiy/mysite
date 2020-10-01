@@ -1,3 +1,5 @@
+from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.contenttypes.fields import GenericRelation
 from comment.models import Comment
 from django.db import models
@@ -16,14 +18,13 @@ class Article(models.Model):
     )
     title = models.CharField(max_length=200, blank=False, null=False, unique=True, verbose_name='عنوان')
     cover = models.ImageField(upload_to='media/article_cover/', null=False, blank=False, verbose_name='عکس مقاله')
-    content = models.TextField(blank=False, null=False, verbose_name='متن مقاله')
+    content = RichTextUploadingField(blank=False, null=False, verbose_name='متن مقاله')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='تاریخ')
     category = models.ManyToManyField('Category', blank=False, verbose_name='دسته بندی', related_name='article')
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='انتشار دهنده', null=False, blank=False)
     status = models.CharField(max_length=1, choices=CHOICES_STATUS, verbose_name='وضعیت', null=False, blank=False,
                               default='پ')
-    comments = GenericRelation(Comment)
-
+    comments = GenericRelation(Comment, related_query_name="article")
 
     class Meta:
         verbose_name = 'مقاله'

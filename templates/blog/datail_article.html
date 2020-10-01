@@ -46,14 +46,14 @@
 
             <div class="card-header bg-warning text-white">
                 <div class="row">
-                    <div class="col-2"><span>نویسنده</span></div>
-                    <div class="col-8 text-center"><img class="rounded-circle style-img-author"
+                    <div class="col-lg-2 col-md-2 d-none d-block "><span>نویسنده</span></div>
+                    <div class="col-lg-8 col-md-8 text-center"><img class="rounded-circle style-img-author"
                                                         src="{{ article.author.avatar.url }}"></div>
                 </div>
             </div>
             <div class="card-body border-0 text-center">
 
-                <h1 class="h6 d-block mr-2 mt-3 ">{{ article.author.user.first_name }} {{ article.author.user.last_name }}</h1>
+                <h1 class="h6 d-block mr-2 mt-3 ">{{ article.author.get_full_name }}</h1>
 
                 <p class="card-text">{{ article.author.description }}</p>
             </div>

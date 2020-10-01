@@ -4,13 +4,14 @@ register = template.Library()
 
 
 @register.inclusion_tag("registration/partials/active_sidebar.html")
-def active_sidebar(request, link_name, content, ic_name):
+def active_sidebar(request, link_name, content, ic_name,type=''):
     return {
-        "requset": request,
+        "request": request,
         "link_name": link_name,
         "content": content,
         "ic_name": ic_name,
         "link": "account:{}".format(link_name),
+        'type':type
     }
 
 

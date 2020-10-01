@@ -10,6 +10,3 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.get_full_name()
-
-    def get_absolute_url(self):
-        return reverse(self.avatar.url)

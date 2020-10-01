@@ -21,13 +21,14 @@
                         {% static 'registration/admin LTE/avatar.png' %}
                     {% endif %}
                 "
-                     class="img-circle elevation-2" style="background: #eeeeee;width: 2.4rem;height:2.4rem " alt="User Image">
+                     class="img-circle elevation-2" style="background: #eeeeee;width: 2.4rem;height:2.4rem "
+                     alt="User Image">
             </div>
             <div class="info">
                 <a href="#" class="d-block">
                     {% if user.get_full_name %}
                         {{ user.get_full_name }}
-                     {% else %}
+                    {% else %}
                         {{ user.username }}
                     {% endif %}
 
@@ -50,17 +51,21 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            {% active_sidebar request 'account' 'لیست مقالات' 'fa-list-ul' %}
+                            {% active_sidebar request 'account' 'لیست مقالات' 'fa-list-ul' 'c'%}
                         </li>
                         <li class="nav-item">
 
-                            {% active_sidebar request 'ArticleCreate' 'افزودن مقالات' 'fa-edit' %}
+                            {% active_sidebar request 'ArticleCreate' 'افزودن مقالات' 'fa-edit' 'c'%}
 
                         </li>
                     </ul>
                 </li>
                 <li class="nav-item">
                     {% active_sidebar request 'Profile' 'پروفایل' 'fa-th' %}
+                </li>
+
+                <li class="nav-item">
+                    {% active_sidebar request 'CommentaAccont' 'نظرات' 'fa-comments' %}
                 </li>
 
             </ul>

@@ -1,5 +1,8 @@
 <a href="{% url link %}"
-   class="nav-link   {% if request.resolver_match.url_name == link_name %} active {% endif %}">
+   class="nav-link
+{% if request.resolver_match.url_name == link_name %} active {% endif %}
+{% if type == 'c' %}mr-2{% endif %} ">
     <i class="fas {{ ic_name }} nav-icon"></i>
+
     <p>{{ content }}</p>
 </a>

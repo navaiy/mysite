@@ -6,7 +6,7 @@
     {% endblock comment_content %}
     <footer class="blockquote-footer">
         <small>
-            <span class="text-secondary  {% block username_cls %}{% endblock username_cls %}"
+            <span id="{{ comment.pk }}" class="text-secondary  {% block username_cls %}{% endblock username_cls %}"
                title="View {{ comment.user }} profile">
                 {% if comment.user.get_full_name %}
                     {{ comment.user.get_full_name }}

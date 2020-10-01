@@ -11,6 +11,7 @@ urlpatterns = [
     path('', include('django.contrib.auth.urls')),
     path('account/', include('account.urls')),
     path('comment/', include('comment.urls')),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
     # path('video/', include('educational_film.urls')),
     # path('video1/', include('mycollections.urls')),
 ]

@@ -3,6 +3,7 @@ from builtins import print
 from django.db.models import Q
 
 from account.models import User
+from comment.models import Comment
 from blog.models import Article
 from django.shortcuts import get_object_or_404, Http404
 
@@ -45,12 +46,12 @@ class SuperUserMixin():
             raise Http404("شما اجازه دیدن این صفحه ندارید")
 
 
-class QuerySet():
+class QuerySetList():
     def get_queryset(self):
 
         table_search = self.request.GET.get('table_search')
-        table_switch = self.request.GET.get('table_switch')
-        print(table_switch)
+        # table_switch = self.request.GET.get('table_switch')
+        # print(table_switch)
 
         if table_search != None:
             return Article.objects.filter(Q(title__contains=table_search)).order_by('-created_at')
@@ -60,3 +61,14 @@ class QuerySet():
             return Article.objects.all().order_by('-created_at')
         else:
             return Article.objects.filter(author=self.request.user).order_by('-created_at')
+
+
+class QuerySetComment():
+    def get_queryset(self):
+
+        if self.request.user.is_superuser:
+            return Comment.objects.all()
+
+        else:
+            return Comment.objects.filter(article__author=self.request.user)
+

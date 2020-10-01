@@ -9,6 +9,8 @@ urlpatterns = [
     path('ArticleUpdate/Update/<int:pk>/', ArticleUpdate.as_view(), name='ArticleUpdate'),
     path('ArticleDelete/Delete/<int:pk>/', ArticleDelete.as_view(), name='ArticleDelete'),
     path('Profile/', Profile.as_view(), name='Profile'),
+    path('CommentaAccont/', CommentaAccont.as_view(), name='CommentaAccont'),
+
 
 ]
 

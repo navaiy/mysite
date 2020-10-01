@@ -1,12 +1,25 @@
 @charset "UTF-8";
 /*My Code*/
 .style-img-card {
-    margin-left: 22px;
-    margin-right: 22px;
-    margin-top: -22px;
+    display: block;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: -20px;
     max-width: 100%;
-    height: 350px;
+    height: 300px;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.55) !important;
+}
+
+@media (max-width: 576px) {
+    .style-img-card {
+        display: block;
+        margin-left: 10%;
+        margin-right: 10%;
+        margin-top: -20px;
+        max-width: 100%;
+        height: 200px;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.55) !important;
+    }
 }
 
 .style-img-card2 {
@@ -557,7 +570,7 @@ mark,
 
 code {
     font-size: 87.5%;
-    color: #e83e8c;
+    /*color: #e83e8c;*/
     word-wrap: break-word;
 }
 

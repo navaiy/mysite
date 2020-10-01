@@ -24,7 +24,7 @@ SECRET_KEY = 'l6d-=i)e)oot9*e3ns(@(o3956*x#=f=6#tjl5&e*!%v6vt5i%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'crispy_forms',
     'comment',
+    'ckeditor',
+    'ckeditor_uploader',
 
 ]
 
@@ -85,11 +87,13 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+
+        # 'ENGINE': 'django.db.backends.mysql',
         # 'NAME': 'mysite',
-        # 'USER': 'postgres',
+        # 'USER': 'root',
         # 'PASSWORD': 'navaiy123456',
-        # 'HOST': 'localhost',
-        # 'PORT': '5432',
+        # 'HOST': 'database',
+        # 'PORT': '3306'
     }
 }
 
@@ -128,7 +132,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
@@ -144,8 +148,12 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 AUTH_USER_MODEL = 'account.User'
 
-
-
-# Heroku Setting
-import django_heroku
-django_heroku.settings(locals())
+# ckeditor
+CKEDITOR_UPLOAD_PATH = "media/uploads/"
+CKEDITOR_JQUERY_URL = 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': None,
+        'width': 'auto',
+    },
+}

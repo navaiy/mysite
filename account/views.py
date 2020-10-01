@@ -1,6 +1,6 @@
+from django.contrib.admin.options import get_content_type_for_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-
 
 from blog.models import *
 from account.models import *
@@ -10,7 +10,7 @@ from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
 from django.urls import reverse_lazy
 
 
-class ArticleList(LoginRequiredMixin, QuerySet, ListView):
+class ArticleList(LoginRequiredMixin, QuerySetList, ListView):
     template_name = 'registration/account.html'
 
 
@@ -49,3 +49,8 @@ class Profile(LoginRequiredMixin, UpdateView):
 class PasswordChange(PasswordChangeView):
     success_url = reverse_lazy('account:password_change_done')
     form_class = PasswordChangeForms
+
+
+class CommentaAccont(LoginRequiredMixin, QuerySetComment, ListView):
+    template_name = 'registration/comment.html'
+    model = Comment
