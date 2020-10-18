@@ -84,9 +84,9 @@ $(function() {
                     var rNum = Number($replyNumber.text()) + 1;
                     $replyNumber.replaceWith('<span class="js-reply-number text-dark">' + rNum + '</span>');
                     if (rNum > 1) {
-                        $reply.replaceWith('<a class="js-reply-link ml-1" href="#">Replies</a>');
+                        $reply.replaceWith('<a class="js-reply-link ml-1" href="#">پاسخ ها</a>');
                     } else {
-                        $reply.replaceWith('<a class="js-reply-link ml-1" href="#">Reply</a>');
+                        $reply.replaceWith('<a class="js-reply-link ml-1" href="#">پاسخ</a>');
                     }
                     commentCount(1);
                 }

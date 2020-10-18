@@ -1,0 +1,11 @@
+<li class="nav-item dropdown">
+    <a class="nav-link js-scroll-trigger" id="navbarDropdownMenuLink"
+       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+       style="font-weight: bold" href="#team">دسته بندی</a>
+    <div class="dropdown-content" aria-labelledby="navbarDropdownMenuLink">
+        {% for  category in categorys %}
+
+            <a class="text-white" href="{% url 'blog:ArticleListCategory' category %}">{{ category }}</a>
+        {% endfor %}
+    </div>
+</li>

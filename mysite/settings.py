@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'l6d-=i)e)oot9*e3ns(@(o3956*x#=f=6#tjl5&e*!%v6vt5i%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -89,10 +89,10 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 
         # 'ENGINE': 'django.db.backends.mysql',
-        # 'NAME': 'mysite',
+        # 'NAME': '',
         # 'USER': 'root',
         # 'PASSWORD': 'navaiy123456',
-        # 'HOST': 'database',
+        # 'HOST': 'mysql',
         # 'PORT': '3306'
     }
 }
@@ -138,9 +138,9 @@ STATICFILES_DIRS = [
 ]
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, '')
+MEDIA_ROOT = os.path.join(BASE_DIR, '/media/')
 
-LOGIN_REDIRECT_URL = 'account:account'
+LOGIN_REDIRECT_URL = 'blog:ArticleList'
 LOGOUT_REDIRECT_URL = 'login'
 LOGIN_URL = 'login'
 
@@ -151,9 +151,17 @@ AUTH_USER_MODEL = 'account.User'
 # ckeditor
 CKEDITOR_UPLOAD_PATH = "media/uploads/"
 CKEDITOR_JQUERY_URL = 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'
+
 CKEDITOR_CONFIGS = {
     'default': {
-        'toolbar': None,
         'width': 'auto',
+        'toolbar': 'full',
+        'extraPlugins': ','.join(
+            [
+                'codesnippet',
+            ]),
+        'codeSnippet_theme': 'monokai',
+        'contentsLangDirection': 'auto',
+        'font_names': 'shabnam; Arial; Helvetica;B Zar;',
     },
 }

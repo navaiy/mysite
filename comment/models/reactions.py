@@ -17,6 +17,10 @@ class Reaction(models.Model):
 
     objects = ReactionManager()
 
+    class Meta:
+        verbose_name = "واکنش"
+        verbose_name_plural = "واکنش ها"
+
     def _increase_count(self, field):
         self.refresh_from_db()
         setattr(self, field, models.F(field) + 1)
@@ -41,11 +45,11 @@ class Reaction(models.Model):
 
 
 class ReactionInstance(models.Model):
-
     @unique
     class ReactionType(IntEnum):
         LIKE = 1
         DISLIKE = 2
+
     CHOICES = [(r.value, r.name) for r in ReactionType]
 
     reaction = models.ForeignKey(Reaction, related_name='reactions', on_delete=models.CASCADE)

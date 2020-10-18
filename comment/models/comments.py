@@ -22,9 +22,12 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ['-posted', ]
+        verbose_name = "نظرات"
+        verbose_name_plural = "نظرات"
 
     def jcreated_d(self):
         return jalali_convert_d(self.posted)
+
     def jcreated_dt(self):
         return jalali_convert_dt(self.posted)
 

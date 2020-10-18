@@ -34,7 +34,7 @@ def adjust_flagged_comments(sender, **kwargs):
 
 class CommentConfig(AppConfig):
     name = 'comment'
-    verbose_name = 'comment'
+    verbose_name = 'نظرات'
 
     def ready(self):
         post_migrate.connect(create_permission_groups, sender=self)

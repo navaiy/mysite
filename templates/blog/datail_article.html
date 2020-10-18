@@ -16,16 +16,15 @@
 
         <!--article-->
         <div class="card rounded shadow">
-            <div class="mr-5 ml-5 mt-3 text-center ">
-                <img class="img-fluid rounded shadow-sm  w-75 " src="{{ article.cover.url }}">
-            </div>
+
+            <img class="style-img-card-datail rounded shadow-sm " src="{{ article.cover.url }}">
             <h1 class="text-info h5 text-center m-3">{{ article.title }}</h1>
             <hr class="hr">
-            <small class="text-secondary text-center ">
+            <span class="text-secondary text-center ">
                 <img src="{% static 'blog/assets/img/view.svg' %}" width="20"
-                     class="  ml-1"/><span class="">32</span>
+                     class="  ml-1"/><span class="">{{ article.number_views }}</span>
                 <img src="{% static 'blog/assets/img/chat.svg' %}" width="17"
-                     class="ml-1 mr-lg-1 mr-md-1"/>32
+                     class="ml-1 mr-lg-1 mr-md-1"/>{% get_comments_count object user %}
                 <img src="{% static 'blog/assets/img/time.svg' %}" width="17"
                      class="ml-1 mr-2"/>{{ article.jcreated_d }}
                 <span class="text-secondary mr-1">
@@ -35,9 +34,9 @@
                         </a>
                 {% endfor %}
                         </span>
-            </small>
-            <div class="card-body">
-                <p class="card-text text-justify">{{ article.content |safe }}</p>
+            </span>
+            <div class="card-body" >
+                <p class="card-text text-justify" id="div-content">{{ article.content |safe  }}</p>
             </div>
         </div>
 

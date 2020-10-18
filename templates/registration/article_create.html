@@ -25,6 +25,7 @@
                     <div class="form-group col-md-12 mb-0">
                         {{ form.content }}
                         {{ form.media }}
+
                     </div>
                     <div class="form-group col-md-6 mb-0">
                         {{ form.category|as_crispy_field }}
@@ -53,10 +54,8 @@
                     <a class="btn btn-danger text-white"
                        href="{% url 'account:ArticleDelete'  request.resolver_match.kwargs.pk %}">حذف</a>
                 {% endif %}
+
             </form>
         </div>
     </div>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-<script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
-<script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
 {% endblock %}

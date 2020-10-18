@@ -1,11 +1,20 @@
 from builtins import print
 
+from django.contrib.auth.mixins import AccessMixin
 from django.db.models import Q
 
 from account.models import User
 from comment.models import Comment
 from blog.models import Article
 from django.shortcuts import get_object_or_404, Http404
+
+
+class LoginMixin(AccessMixin):
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_superuser or request.user.is_author:
+            return self.handle_no_permission()
+        else:
+            return super().dispatch(request, *args, **kwargs)
 
 
 class FieldMixin():
@@ -71,4 +80,3 @@ class QuerySetComment():
 
         else:
             return Comment.objects.filter(article__author=self.request.user)
-

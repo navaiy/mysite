@@ -1,4 +1,5 @@
 {% extends 'registration/base.html' %}
+{% load comment_tags %}
 {% load widget_tweaks %}
 
 {% block htitle %}لیست مقالات{% endblock %}
@@ -44,6 +45,7 @@
                             <th>نویسنده</th>
                             <th>دسته بندی</th>
                             <th>تاریخ انتشار</th>
+                            <th>آمار</th>
                             <th>وضعیت</th>
                         </tr>
                         </thead>
@@ -60,6 +62,10 @@
                                     <td>{{ article.author.get_full_name }}</td>
                                     <td>{{ article.category_title }}</td>
                                     <td>{{ article.jcreated_at }}</td>
+                                    <td>
+                                        <span> بازدید : {{ article.number_views }}</span><br>
+                                        <span>نظرات : {% get_comments_count article user %}</span>
+                                    </td>
                                     <td>
                                         <!---------------------------------------------->
                                         {% if article.status == 'م' %}

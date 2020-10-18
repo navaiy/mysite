@@ -1,0 +1,138 @@
+{% load widget_tweaks %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Register</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'registration/Login/css/main.css' %}">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="{% static 'registration/Login/images/icons/favicon.ico' %}"/>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'registration/Login/vendor/bootstrap/css/bootstrap.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'registration/Login/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'registration/Login/fonts/iconic/css/material-design-iconic-font.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'registration/Login/vendor/animate/animate.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'registration/Login/vendor/css-hamburgers/hamburgers.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'registration/Login/vendor/animsition/css/animsition.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'registration/Login/vendor/select2/select2.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'registration/Login/vendor/daterangepicker/daterangepicker.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'registration/Login/css/util.css' %}">
+    <!--===============================================================================================-->
+</head>
+<body>
+{% if form.errors %}
+    <div class="alert alert-danger mb-0 text-center">
+        <ul>
+            {% for field in form %}
+                {% if field.errors %}
+                    <li class="text-center">{{ field.label }} : {{ field.errors|striptags }}</li>{% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+
+<div class="limiter">
+    <div class="container-login100"
+         style="background-image: url('{% static "registration/Login/images/bg-01.jpg" %}');">
+        <div class="wrap-login100">
+            <form class="login100-form validate-form" method="post">
+                {% csrf_token %}
+                <span class="login100-form-logo">
+						<i class="zmdi zmdi-landscape"></i>
+					</span>
+
+                <span class="login100-form-title p-b-34 p-t-27">
+						ورود
+					</span>
+
+                <div class="wrap-input100 validate-input" dir="rtl" data-validate="Enter username">
+                    {#                    <input class="input100" type="text" name="username" placeholder="نام کاربری">#}
+                    {{ form.username|add_class:"input100"|attr:'placeholder:نام کاربری' }}
+
+                    <span class="focus-input100" data-placeholder="&#xf207;"></span>
+
+                </div>
+
+                <div class="wrap-input100 validate-input" dir="rtl" data-validate="Enter password">
+                    {#                    <input class="input100" type="password" name="pass" placeholder="رمز">#}
+                    {{ form.password1|add_class:"input100"|attr:' placeholder:رمز ' }}
+
+                    <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                </div>
+                <small class="text-white ">
+                    <ul class="pr-2">
+                        <li style="list-style: disc">رمز عبور شما نمی تواند شبیه سایر اطلاعات شما باشد.</li>
+                        <li style="list-style: disc">رمز عبور شما می&zwnj;بایست حداقل از 8 حرف تشکیل شده باشد.</li>
+                        <li style="list-style: disc">رمز عبور شما نمی تواند از عبارات معروف باشد.</li>
+                        <li style="list-style: disc">رمز عبور شما نمی تواند کاملا عدد باشد.</li>
+                    </ul>
+                </small>
+                <div class="wrap-input100 validate-input" dir="rtl" data-validate="Enter password">
+                    {#                    <input class="input100" type="password" name="pass" placeholder="رمز">#}
+                    {{ form.password2|add_class:"input100"|attr:' placeholder:تایید رمز ' }}
+
+                    <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                </div>
+
+                {#                <div class="contact100-form-checkbox">#}
+                {#                    <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">#}
+                {#                    <label class="label-checkbox100" for="ckb1">#}
+                {#                        Remember me#}
+                {#                    </label>#}
+                {#                </div>#}
+
+                <div class="container-login100-form-btn">
+                    <button class="login100-form-btn">
+                        <span class=" text-dark text-bold ">  ثبت نام</span>
+                    </button>
+                </div>
+
+                <div class="text-center p-t-90">
+                    <a class="txt1 " style="font-size: 18px" href="{% url 'login' %}">
+                        ورود
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div id="dropDownSelect1"></div>
+
+<!--===============================================================================================-->
+<script src="{% static 'registration/Login/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+<script src="{% static 'registration/Login/vendor/animsition/js/animsition.min.js' %}"></script>
+<!--===============================================================================================-->
+<script src="{% static 'registration/Login/vendor/bootstrap/js/popper.js' %}"></script>
+<script src="{% static 'registration/Login/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+<script src="{% static 'registration/Login/vendor/select2/select2.min.js' %}"></script>
+<!--===============================================================================================-->
+<script src="{% static 'registration/Login/vendor/daterangepicker/moment.min.js' %}"></script>
+<script src="{% static 'registration/Login/vendor/daterangepicker/daterangepicker.js' %}"></script>
+<!--===============================================================================================-->
+<script src="{% static 'registration/Login/vendor/countdowntime/countdowntime.js' %}"></script>
+<!--===============================================================================================-->
+<script src="{% static 'registration/Login/js/main.js' %}"></script>
+
+</body>
+</html>

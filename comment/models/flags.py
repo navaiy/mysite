@@ -32,7 +32,9 @@ class Flag(models.Model):
     moderator = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
     objects = FlagManager()
-
+    class Meta:
+        verbose_name = "نشانه گذاری"
+        verbose_name_plural = "نشانه گذاری ها"
     def increase_count(self):
         """Increase flag count and save the model """
         self.refresh_from_db()
@@ -110,6 +112,7 @@ class FlagInstance(models.Model):
     class Meta:
         unique_together = ('flag', 'user')
         ordering = ('date_flagged',)
+
 
 
 @receiver(post_save, sender=FlagInstance)

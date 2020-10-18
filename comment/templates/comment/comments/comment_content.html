@@ -39,7 +39,7 @@
             {% if comment.is_parent %}
                 {% get_replies_count comment user as reply_count %}
                 | <span class="js-reply-number text-dark">{{ reply_count }}</span>
-                <a class="js-reply-link {% block reply_link_cls %}btn btn-link ml-1{% endblock reply_link_cls %}"
+                <a class=" js-reply-link {% block reply_link_cls %}btn btn-link ml-1{% endblock reply_link_cls %}"
                    href="#">
                     پاسخ
                 </a>

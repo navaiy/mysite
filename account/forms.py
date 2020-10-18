@@ -1,6 +1,7 @@
 from django import forms
-from django.contrib.auth.forms import SetPasswordForm, PasswordChangeForm
+from django.contrib.auth.forms import SetPasswordForm, PasswordChangeForm, UserCreationForm
 from django.utils.html import format_html
+from django.utils.translation import gettext, gettext_lazy as _
 
 from account.models import User
 from blog.models import Article
@@ -33,4 +34,13 @@ class PasswordChangeForms(PasswordChangeForm):
 class ArticleCreateForms(forms.ModelForm):
     class Meta:
         model = Article
-        fields = ['title', 'cover', 'content',  'category', 'author','status']
+        fields = ['title', 'cover', 'content', 'category', 'author', 'status']
+
+
+class CustomUserCreationForm(UserCreationForm):
+    error_messages = {
+        'password_mismatch': _('دو قسمت رمز عبور با هم مطابقت ندارند.'),
+    }
+    class Meta:
+        model = User
+        fields = ('username', 'password1', 'password2')

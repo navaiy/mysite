@@ -55,13 +55,12 @@
         </ul>
 
 
-
         <!-- Right navbar links -->
         <ul class="navbar-nav mr-auto-navbav">
             <!-- Messages Dropdown Menu -->
             <li class="nav-item dropdown">
-                <a class="nav-link"  href="{% url 'logout' %}">
-                    <img width="25" src="{% static 'registration/Login/sign-out-alt-solid.svg' %}">
+                <a class="nav-link" href="{% url 'logout' %}">
+                    <img width="27" src="{% static 'registration/Login/icons8-exit-26.png' %}">
                 </a>
             </li>
 
@@ -82,10 +81,10 @@
                         <h1 class="m-0 text-dark">{% block title %}عنوان{% endblock %}</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
-{#                        <ol class="breadcrumb float-sm-right">#}
-{#                            <li class="breadcrumb-item"><a href="#">Home</a></li>#}
-{#                            <li class="breadcrumb-item active">Dashboard v1</li>#}
-{#                        </ol>#}
+                        {#                        <ol class="breadcrumb float-sm-right">#}
+                        {#                            <li class="breadcrumb-item"><a href="#">Home</a></li>#}
+                        {#                            <li class="breadcrumb-item active">Dashboard v1</li>#}
+                        {#                        </ol>#}
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
@@ -149,5 +148,10 @@
 <script src="{% static 'registration/admin LTE/assets/js/pages/dashboard.js' %}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{% static 'registration/admin LTE/assets/js/demo.js' %}"></script>
+{#<script>hljs.initHighlightingOnLoad();</script>#}
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+
 </body>
 </html>

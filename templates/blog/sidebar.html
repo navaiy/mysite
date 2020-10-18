@@ -13,17 +13,18 @@
                         <li class="list-group-item">
                             <img class="rounded-circle style-img-list-right"
                                  src="{{ list.cover.url }}">
-                            <a class="small btn-link mr-1 " style="margin-top: -10px;" href="{% url 'blog:DetailArticle' list.title %}">{{ list.title }}</a>
-                            <small class="d-block">
-                                <img class="ml-2 mr-5 pr-3" src="{% static 'blog/assets/img/time.svg' %}"
-                                     height="24">1345/2/2
+                            <a class="small btn-link mr-1 " style="margin-top: -10px;"
+                               href="{% url 'blog:DetailArticle' list.title %}">{{ list.title }}</a>
+                            <small class="d-block text-left  mt-3">
+                                <img src="{% static 'blog/assets/img/time.svg' %}"
+                                     height="24">{{ list.jcreated_d }}
                             </small>
                         </li>
                     {% endfor %}
                 </ul>
             </div>
         </div>
-
+        <!--==========================================================================-->
         <!--last Comments-->
         <div class="col-12 mt-4">
             <div class="card shadow rounded">
@@ -35,10 +36,11 @@
                         <li class="list-group-item">
                             <img class="rounded-circle style-img-list-right"
                                  src="{{ comment.user.avatar.url }}">
-                            <h6 class="card-title d-inline mr-2 " href="#">{{ comment.user.get_full_name }}</h6>
+                            <h6 class="text-secondary d-inline mr-2 mt-3">{{ comment.user.get_full_name }}</h6>
+
                             <p style="font-size: 17px" class="mr-5  text-secondary mt-0">{{ comment.content }}</p>
                             <small class="d-block text-left">
-                                <img class="ml-2 mr-5 pr-3" src="{% static 'blog/assets/img/time.svg' %}"
+                                <img class="ml-2 " src="{% static 'blog/assets/img/time.svg' %}"
                                      height="24">{{ comment.jcreated_d }}
                             </small>
                         </li>

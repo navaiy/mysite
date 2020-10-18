@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block header %}
-    <h2 class="text-right text-white shadow-lg">آموزش ها و مقالات</h2>
+    <h2 class="text-right text-white ">آموزش ها و مقالات</h2>
 {% endblock %}
 
 {% block side_box %}
@@ -21,14 +21,14 @@
 
     <!--article list-->
     {% for article in object_list %}
-        <div class="col-lg-12 col-sm-12  pb-5">
+        <div class="col-lg-12 col-sm-12 pb-5 p-lg-5 p-md-4 ">
             <div class="card rounded shadow border-0 card-hover">
 
-                <img class="style-img-card  rounded "  src="{{ article.cover.url }}"
+                <img class="style-img-card  rounded " src="{{ article.cover.url }}"
                      alt="{{ article.title }}">
                 <div class="card-body">
                     <h5 class="card-title text-center">{{ article.title }}</h5>
-                    <p class="card-text mt-3 text-justify small">{{ article.content|striptags|truncatewords:52 }}</p>
+                    <p class="card-text mt-3 text-justify small" style="font-size: 17px">{{ article.content|striptags|truncatewords:52 }}</p>
                 </div>
                 <div class="card-footer mt-3 rounded">
                     <a href="{% url 'blog:DetailArticle' article.title %}" class="btn btn-primary rounded float-left">ادامه
@@ -36,7 +36,7 @@
                     <small class="text-secondary">
                         <img src="{% static 'blog/assets/img/view.svg' %}" width="23"
                              class=" d-none d-lg-inline d-md-inline ml-1"/><span
-                            class="d-none d-lg-inline d-md-inline">32</span>
+                            class="d-none d-lg-inline d-md-inline">{{ article.number_views }}</span>
                         <img src="{% static 'blog/assets/img/chat.svg' %}" width="20"
                              class="ml-1 mr-lg-1 mr-md-1"/>{% get_comments_count article user %}
                         <img src="{% static 'blog/assets/img/time.svg' %}" width="20"
