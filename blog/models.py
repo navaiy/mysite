@@ -23,9 +23,9 @@ class Article(models.Model):
     category = models.ManyToManyField('Category', blank=False, verbose_name='دسته بندی', related_name='article')
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='انتشار دهنده', null=False, blank=False)
     number_views = models.IntegerField(default=0, verbose_name='تعداد بازدید')
-    status = models.CharField(max_length=1, choices=CHOICES_STATUS, verbose_name='وضعیت', null=False, blank=False,
-                              default='پ')
+    status = models.CharField(max_length=1, choices=CHOICES_STATUS, verbose_name='وضعیت', null=False, blank=False,default='پ')
     comments = GenericRelation(Comment, related_query_name="article")
+    preview=models.TextField(verbose_name="پیش نمایش",blank=False,null=False)
 
     class Meta:
         verbose_name = 'مقاله'

@@ -109,6 +109,10 @@ pre * {
 .rtl {
     text-align: right;
 }
+.drtl {
+    text-align: right;
+    direction: rtl;
+}
 
 /*!
 * Start Bootstrap - Agency v6.0.2 (https://startbootstrap.com/template-overviews/agency)

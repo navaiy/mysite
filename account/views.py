@@ -16,7 +16,8 @@ class ArticleList(LoginMixin, QuerySetList, ListView):
 
 class ArticleCreate(LoginMixin, FieldMixin, FormValidMixin, CreateView):
     template_name = 'registration/article_create.html'
-    model = Article
+    # model = Article
+    form_class = ArticleCreateForms
 
 
 class ArticleUpdate(AuthorAccessMixin, FieldMixin, FormValidMixin, UpdateView):

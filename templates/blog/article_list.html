@@ -28,7 +28,7 @@
                      alt="{{ article.title }}">
                 <div class="card-body">
                     <h5 class="card-title text-center">{{ article.title }}</h5>
-                    <p class="card-text mt-3 text-justify small" style="font-size: 17px">{{ article.content|striptags|truncatewords:52 }}</p>
+                    <p class="card-text mt-3 text-justify small" style="font-size: 17px">{{ article.preview|safe|truncatewords:52 }}</p>
                 </div>
                 <div class="card-footer mt-3 rounded">
                     <a href="{% url 'blog:DetailArticle' article.title %}" class="btn btn-primary rounded float-left">ادامه

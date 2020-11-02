@@ -11,7 +11,8 @@ from django.shortcuts import get_object_or_404, Http404
 
 class LoginMixin(AccessMixin):
     def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_superuser or request.user.is_author:
+
+        if not request.user.is_author  :
             return self.handle_no_permission()
         else:
             return super().dispatch(request, *args, **kwargs)
@@ -20,7 +21,7 @@ class LoginMixin(AccessMixin):
 class FieldMixin():
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_superuser:
-            self.fields = ['title', 'cover', 'content', 'category', 'author', 'status']
+            self.fields = ['title', 'cover','preview', 'content', 'category', 'author', 'status']
         else:
             self.fields = ['title', 'cover', 'content', 'category', 'status']
         return super().dispatch(request, *args, **kwargs)

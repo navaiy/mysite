@@ -1,4 +1,5 @@
 {% extends 'registration/base.html' %}
+{% load widget_tweaks %}
 {% load static %}
 {% load  crispy_forms_tags %}
 
@@ -20,6 +21,9 @@
                     </div>
                     <div class="form-group col-md-6 mb-0">
                         {{ form.cover|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-10 mb-0 " style="direction: rtl">
+                        {{ form.preview|attr:"rows:3"|append_attr:'style:direction:rtl'|as_crispy_field }}
                     </div>
 
                     <div class="form-group col-md-12 mb-0">
