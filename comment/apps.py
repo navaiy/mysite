@@ -8,13 +8,13 @@ def create_permission_groups(sender, **kwargs):
     from comment.models import Comment
 
     comment_ct = ContentType.objects.get_for_model(Comment)
-    delete_comment_perm, _ = Permission.objects.get_or_create(
-        codename='delete_comment',
-        name='Can delete comment',
-        content_type=comment_ct
-    )
+    # delete_comment_perm, _ = Permission.objects.get_or_create(
+    #     codename='delete_comment',
+    #     name='Can delete comment',
+    #     content_type=comment_ct
+    # )
     admin_group, _ = Group.objects.get_or_create(name='comment_admin')
-    admin_group.permissions.add(delete_comment_perm)
+    # admin_group.permissions.add(delete_comment_perm)
     delete_flagged_comment_perm, _ = Permission.objects.get_or_create(
         codename='delete_flagged_comment',
         name='Can delete flagged comment',
@@ -34,7 +34,7 @@ def adjust_flagged_comments(sender, **kwargs):
 
 class CommentConfig(AppConfig):
     name = 'comment'
-    verbose_name = 'نظرات'
+    verbose_name = 'comment'
 
     def ready(self):
         post_migrate.connect(create_permission_groups, sender=self)

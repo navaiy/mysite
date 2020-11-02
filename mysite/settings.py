@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'l6d-=i)e)oot9*e3ns(@(o3956*x#=f=6#tjl5&e*!%v6vt5i%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -133,12 +133,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, '/media/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_REDIRECT_URL = 'blog:ArticleList'
 LOGOUT_REDIRECT_URL = 'login'
@@ -161,7 +159,7 @@ CKEDITOR_CONFIGS = {
                 'codesnippet',
             ]),
         'codeSnippet_theme': 'monokai',
-        'contentsLangDirection': 'auto',
+        'contentsLangDirection': 'left',
         'font_names': 'shabnam; Arial; Helvetica;B Zar;',
     },
 }
